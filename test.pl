@@ -15,4 +15,4 @@ ok(1); # If we made it this far, we're ok.
 # Insert your test code below, the Test module is use()ed here so read
 # its man page ( perldoc Test ) for help writing this test script.
 
-ok (makeashorterlink('http://www.team.schoolmaster.net/?redirect=/cgi-bin/nav/school_page.pl') eq 'http://makeashorterlink.com/?E54E32F91');
+ok (makeashorterlink('http://dave.org.uk/scripts/webged-1.02.tar.gz') eq 'http://makeashorterlink.com/?M328231A1');

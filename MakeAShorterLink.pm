@@ -8,7 +8,7 @@ require Exporter;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(makeashorterlink);
-our $VERSION = '0.01';
+our $VERSION = sprintf "%d.%02d", '$Revision: 1.2 $ ' =~ /(\d+)\.(\d+)/;
 
 use LWP;
 use URI::Escape;
@@ -21,13 +21,10 @@ sub makeashorterlink {
 
   my $ua = LWP::UserAgent->new;
 
-  my $req = HTTP::Request->new(POST => $masl);
-  $req->content_type('application/x-www-form-urlencoded');
-  $req->content ( 'url=' . uri_escape("$url") . '&' . 'submit=' . uri_escape('Make a shorter link') );
+  my $resp = $ua->post($masl,
+                       [ url => $url ]);
 
-  my $resp = $ua->request($req);
-
-  return undef unless $resp->is_success;
+  return unless $resp->is_success;
 
   if ($resp->content =~ m!Your shorter link is: <a href="(.*)">!) {
     return $1;
